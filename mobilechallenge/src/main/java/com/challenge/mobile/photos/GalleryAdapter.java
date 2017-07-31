@@ -53,6 +53,11 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryThumbnailViewHol
 		return photos.size();
 	}
 
+	public void refreshData(List<Photo> photos) {
+		this.photos = photos;
+		notifyDataSetChanged();
+	}
+
 	interface OnPhotoClickedListener {
 		void photoClicked(Photo photo);
 	}

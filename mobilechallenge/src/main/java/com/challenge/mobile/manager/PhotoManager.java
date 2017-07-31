@@ -20,6 +20,7 @@ public class PhotoManager {
 	private static final String GALLERY_PHOTO_SIZE = "4";
 	private static final String GALLERY_PHOTO_FEATURE = "popular";
 	private static final String GALLERY_PHOTO_SORT = "rating";
+	private static final String EXCLUDE_NUDE = "Nude";
 
 	protected int currentPage = 1;
 
@@ -32,8 +33,8 @@ public class PhotoManager {
 		api = retrofit.create(Api.class);
 	}
 
-	public Single<List<Photo>> getPhotos(boolean nextPage) {
-		PhotosRequest request = new PhotosRequest(GALLERY_PHOTO_FEATURE, GALLERY_PHOTO_SORT, GALLERY_PHOTO_SIZE, String.valueOf(nextPage ? currentPage + 1 : currentPage));
+	public Single<List<Photo>> getPhotos(boolean nextPage, boolean excludeNude) {
+		PhotosRequest request = new PhotosRequest(GALLERY_PHOTO_FEATURE, GALLERY_PHOTO_SORT, GALLERY_PHOTO_SIZE, String.valueOf(nextPage ? currentPage + 1 : currentPage), excludeNude ? EXCLUDE_NUDE : "");
 		return api.getPhotos(request.toQueryMap()).map(new Func1<PhotosResponse, List<Photo>>() {
 			@Override
 			public List<Photo> call(PhotosResponse photosResponse) {

@@ -38,7 +38,7 @@ public class NetworkTest {
 
 	@Test
 	public void testGetPhotos() throws Exception {
-		PhotosRequest request = new PhotosRequest("fresh_today", "rating", "4", "1");
+		PhotosRequest request = new PhotosRequest("fresh_today", "rating", "4", "1", "Nude");
 		TestSubscriber<PhotosResponse> responseTestSubscriber = new TestSubscriber<>();
 		api.getPhotos(request.toQueryMap()).subscribe(responseTestSubscriber);
 		responseTestSubscriber.awaitTerminalEvent();
