@@ -38,6 +38,8 @@ dependencies {
     compile "com.android.support.constraint:constraint-layout:$constraintlayout"
     //Image processing
     compile "com.facebook.fresco:fresco:$fresco"
+    compile 'com.squareup.picasso:picasso:2.5.2'
+
     //RxJava
     compile "io.reactivex:rxjava:$rxjava"
     compile "com.jakewharton.rxrelay:rxrelay:$rxrelay"

@@ -23,7 +23,10 @@ public class PhotoManager {
 
 	protected int currentPage = 1;
 
+	protected boolean hasMorePage = true;
+
 	protected Api api;
+
 
 	public PhotoManager(Retrofit retrofit) {
 		api = retrofit.create(Api.class);
@@ -35,6 +38,7 @@ public class PhotoManager {
 			@Override
 			public List<Photo> call(PhotosResponse photosResponse) {
 				currentPage = photosResponse.getCurrentPage();
+				hasMorePage = photosResponse.getTotalPages() > currentPage;
 				return photosResponse.getPhotos();
 			}
 		});
@@ -42,5 +46,9 @@ public class PhotoManager {
 
 	public int getCurrentPage() {
 		return currentPage;
+	}
+
+	public boolean hasMorePage() {
+		return hasMorePage;
 	}
 }
