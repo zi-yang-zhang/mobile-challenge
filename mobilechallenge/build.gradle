@@ -10,8 +10,12 @@ android {
         targetSdkVersion globalTargetSdkVersion
         versionCode 1
         versionName "1.0"
+        buildConfigField 'String', 'ENDPOINT', '\"https://api.500px.com/\"'
+
+        buildConfigField 'String', 'CONSUMER_KEY', '\"rGAX1SRM1GUsfkMeQkilJiKNU9KFifLS4WQYSqed\"'
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
 
     }
     buildTypes {
