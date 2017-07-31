@@ -30,8 +30,26 @@ public class Photo {
 	@SerializedName("user")
 	private User user;
 
+	@Expose
+	@SerializedName("width")
+	private Long width;
+
+	@Expose
+	@SerializedName("height")
+	private Long height;
+
 	public Integer getId() {
 		return id;
+	}
+
+
+	public Long getWidth() {
+		return width;
+	}
+
+	public Long getHeight() {
+
+		return height;
 	}
 
 	public String getName() {

@@ -63,9 +63,7 @@ public class NetworkTest {
 	@Module(
 			injects = NetworkTest.class,
 			//Need dependencies from other modules
-			complete = false,
-			//Provides dependencies to other modules
-			library = true
+			complete = false
 	)
 	protected class TestModule {
 	}
