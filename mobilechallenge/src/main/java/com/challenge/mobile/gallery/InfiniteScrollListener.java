@@ -1,4 +1,4 @@
-package com.challenge.mobile.photos;
+package com.challenge.mobile.gallery;
 
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -31,7 +31,7 @@ public class InfiniteScrollListener extends RecyclerView.OnScrollListener {
 		}
 	}
 
-	public interface onUpdateListListener {
+	interface onUpdateListListener {
 		void updateList();
 
 		boolean hasMorePage();

@@ -34,7 +34,10 @@ public class PhotosRequest extends AbstractRequest {
 		queryMap.put(SORT_KEY, sort);
 		queryMap.put(IMAGE_SIZE_KEY, imageSize);
 		queryMap.put(PAGE_KEY, page);
-		queryMap.put(EXCLUDE_KEY, excludeToCVS());
+		String excludes = excludeToCVS();
+		if (excludes.length() > 0) {
+			queryMap.put(EXCLUDE_KEY, excludeToCVS());
+		}
 
 		return queryMap;
 	}

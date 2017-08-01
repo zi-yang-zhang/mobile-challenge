@@ -1,4 +1,4 @@
-package com.challenge.mobile.photos;
+package com.challenge.mobile.gallery;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -6,9 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.challenge.mobile.R;
+import com.challenge.mobile.manager.PhotoManager;
 import com.challenge.mobile.model.Photo;
+import com.facebook.drawee.view.SimpleDraweeView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,18 +18,23 @@ import java.util.List;
 
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryThumbnailViewHolder> {
 
-	protected List<Photo> photos;
-	protected OnPhotoClickedListener onPhotoClickedListener;
 
-	public GalleryAdapter(OnPhotoClickedListener listener) {
-		this.photos = new ArrayList<>();
+	protected OnPhotoClickedListener onPhotoClickedListener;
+	protected PhotoManager manager;
+
+	public GalleryAdapter(OnPhotoClickedListener listener, PhotoManager manager) {
 		this.onPhotoClickedListener = listener;
+		this.manager = manager;
 	}
 
-	public void addPhotos(List<Photo> photos) {
-		int lastIndex = this.photos.size();
-		this.photos.addAll(photos);
-		notifyItemRangeInserted(lastIndex, photos.size());
+	public void updatePhotos(int lastIndex) {
+		if (lastIndex == -1) {
+			notifyDataSetChanged();
+		} else {
+			List<Photo> photos = manager.getCachedPhotos();
+			notifyItemRangeInserted(lastIndex, photos.size());
+		}
+
 	}
 
 	@Override
@@ -39,26 +45,23 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryThumbnailViewHol
 
 	@Override
 	public void onBindViewHolder(final GalleryThumbnailViewHolder holder, int position) {
+		((SimpleDraweeView) holder.itemView).setImageURI(null);
+		List<Photo> photos = manager.getCachedPhotos();
 		holder.loadImage(photos.get(position));
 		holder.itemView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				onPhotoClickedListener.photoClicked(photos.get(holder.getAdapterPosition()));
+				onPhotoClickedListener.photoClicked(holder.getAdapterPosition());
 			}
 		});
 	}
 
 	@Override
 	public int getItemCount() {
-		return photos.size();
-	}
-
-	public void refreshData(List<Photo> photos) {
-		this.photos = photos;
-		notifyDataSetChanged();
+		return manager.getCachedPhotos().size();
 	}
 
 	interface OnPhotoClickedListener {
-		void photoClicked(Photo photo);
+		void photoClicked(int photoIndex);
 	}
 }

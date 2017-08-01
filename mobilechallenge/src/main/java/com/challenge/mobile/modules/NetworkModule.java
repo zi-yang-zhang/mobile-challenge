@@ -37,6 +37,8 @@ public class NetworkModule {
 		OkHttpClient httpClient = new OkHttpClient
 				.Builder()
 				.connectTimeout(6, TimeUnit.SECONDS)
+				.readTimeout(10, TimeUnit.SECONDS)
+				.writeTimeout(10, TimeUnit.SECONDS)
 				.addInterceptor(loggingInterceptor)
 				.build();
 		return new Retrofit

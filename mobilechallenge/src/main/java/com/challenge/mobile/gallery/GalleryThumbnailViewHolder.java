@@ -1,4 +1,4 @@
-package com.challenge.mobile.photos;
+package com.challenge.mobile.gallery;
 
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;

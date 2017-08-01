@@ -1,5 +1,6 @@
 package com.challenge.mobile.modules;
 
+import com.challenge.mobile.core.SharedPrefHelper;
 import com.challenge.mobile.manager.PhotoManager;
 
 import dagger.Module;
@@ -17,7 +18,7 @@ import retrofit2.Retrofit;
 public class ManagerModule {
 
 	@Provides
-	PhotoManager providePhotoManager(Retrofit retrofit) {
-		return new PhotoManager(retrofit);
+	PhotoManager providePhotoManager(Retrofit retrofit, SharedPrefHelper sharedPrefHelper) {
+		return new PhotoManager(retrofit, sharedPrefHelper);
 	}
 }

@@ -1,8 +1,6 @@
 package com.challenge.mobile;
 
-import com.challenge.mobile.model.network.request.PhotoByIdRequest;
 import com.challenge.mobile.model.network.request.PhotosRequest;
-import com.challenge.mobile.model.network.response.PhotoByIdResponse;
 import com.challenge.mobile.model.network.response.PhotosResponse;
 import com.challenge.mobile.modules.NetworkModule;
 import com.challenge.mobile.network.Api;
@@ -47,19 +45,6 @@ public class NetworkTest {
 		responseTestSubscriber.assertValueCount(1);
 		Assert.assertNotEquals(0, responseTestSubscriber.getOnNextEvents().get(0).getPhotos().size());
 	}
-
-	@Test
-	public void testGetPhotoById() throws Exception {
-		PhotoByIdRequest request = new PhotoByIdRequest("4", 221759409);
-		TestSubscriber<PhotoByIdResponse> responseTestSubscriber = new TestSubscriber<>();
-		api.getPhotoById(request.getId(), request.toQueryMap()).subscribe(responseTestSubscriber);
-		responseTestSubscriber.awaitTerminalEvent();
-		responseTestSubscriber.assertCompleted();
-		responseTestSubscriber.assertNoErrors();
-		responseTestSubscriber.assertValueCount(1);
-		Assert.assertNotNull(responseTestSubscriber.getOnNextEvents().get(0).getPhoto().getImageUrl());
-	}
-
 	@Module(
 			injects = NetworkTest.class,
 			//Need dependencies from other modules
